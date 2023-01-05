@@ -91,7 +91,10 @@ die() {
 listProfiles() {
   # our profilesRoot may contain dirs that are not qutebrowser profiles, so we look for
   # the 'state' file to determine whether something is a profile, and then pipe thru dirname
-  { if [ $allowNoProfile -eq 1 ]; then echo "$noProfileName"; fi; find "$profilesRoot" -mindepth 2 -maxdepth 2 -name state -type f -printf "%P\n" | xargs dirname ; }
+  if [ $allowNoProfile -eq 1 ]; then
+    echo "$noProfileName"
+  fi
+  find "$profilesRoot" -mindepth 2 -maxdepth 2 -name state -type f -printf "%P\n" | xargs dirname
 }
 
 # usage: checkProfileExists <profile>
