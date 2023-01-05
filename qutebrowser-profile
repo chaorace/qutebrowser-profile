@@ -2,7 +2,8 @@
 
 # MIT License
 # 
-# Copyright (c) 2020 jtyers, ayekat
+# Copyright (c) 2020-2021 jtyers, ayekat (https://github.com/jtyers/qutebrowser-profile, https://github.com/ayekat/dotfiles/blob/master/bin/qutebrowser)
+# Copyright (c) 2022 chaorace (https://github.com/chaorace/qutebrowser-profile)
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -60,8 +61,9 @@ USAGE
     Override location of qutebrowser to call.
 
 Version $QP_VERSION
-https://github.com/jtyers/qutebrowser-profile
-Written by Jonny Tyers
+This fork is maintained by Christopher Crockett (https://github.com/chaorace/qutebrowser-profile)
+Base package written by Jonny Tyers (https://github.com/jtyers/qutebrowser-profile)
+Original concept by ayekat (https://github.com/ayekat/dotfiles/blob/master/bin/qutebrowser)
 Released under the MIT Licence. See LICENCE file for full licence terms.
 
 EOF

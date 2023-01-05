@@ -4,21 +4,18 @@ A wrapper script for qutebrowser that allows you to maintain different profiles,
 
 ## Why?
 
-I use my system for different projects and purposes, such as *email*, *cloud development*, *web browsing* and so on. Using `qutebrowser-profile` I can keep all of these in separate qutebrowser profiles. (I in fact also keep them in separate i3 profiles via [i3-launcher](https://github.com/jtyers/i3-launcher) too, but that's another story).
+I use my system for different projects and purposes, such as *email*, *cloud development*, *web browsing* and so on. Using `qutebrowser-profile` I can keep all of these in separate qutebrowser profiles.
+
+## Credit
+This fork is maintained by [Christopher Crockett](https://github.com/chaorace/qutebrowser-profile)
+Base package written by [Jonny Tyers](https://github.com/jtyers/qutebrowser-profile)
+Original concept by [ayekat](https://github.com/ayekat/dotfiles/blob/master/bin/qutebrowser)
 
 ## Installation
 
 Clone this repository and add it to your `$PATH`.
 
 The script depends on `dmenu`. Rofi is also supported and automatically used if available. You can also override, e.g. `--dmenu="rofi -dmenu"`.
-
-### Arch Linux
-
-There is a [package](https://aur.archlinux.org/packages/qutebrowser-profile-git/) available in the AUR:
-
-```
-yay qutebrowser-profile-git
-```
 
 ## Getting started
 
@@ -82,4 +79,4 @@ USAGE
 
 ## Licence
 
-MIT
+See LICENSE file
