@@ -5,6 +5,7 @@
 pkgname=qutebrowser-profile-chao
 _pkgname="qutebrowser-profile"
 provides=("qutebrowser-profile")
+conflicts=("qutebrowser-profile-git")
 pkgdesc="A fork of the simple wrapper script for qutebrowser that allows you to maintain different profiles"
 url="https://github.com/chaorace/qutebrowser-profile"
 pkgver=1
