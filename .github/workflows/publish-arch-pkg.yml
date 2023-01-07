@@ -1,0 +1,33 @@
+name: Publish Arch package
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  repoadd:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        ref: arch-repo
+    - name: Download release package artifact
+      id: dl
+      uses: robinraju/release-downloader@v1.7
+      with:
+        fileName: "*.pkg.tar.zst"
+        latest: true
+    - name: Add package to repo database
+      uses: "uraimo/run-on-arch-action@v2"
+      with:
+        arch: aarch64
+        distro: archarm_latest
+        run: |
+          mv *.pkg.tar.zst ./pool/
+          cd ./pool
+          repo-add qutebrowser-profile-chao.db.tar.gz *.pkg.tar.zst
+    - name: Commit updated package file
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Package update ${{steps.dl.outputs.tag_name}}
