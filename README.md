@@ -14,10 +14,31 @@ Base package written by [Jonny Tyers](https://github.com/jtyers/qutebrowser-prof
 Original concept by [ayekat](https://github.com/ayekat/dotfiles/blob/master/bin/qutebrowser)
 
 ## Installation
+The `qutebrowser-profile` is written in bash-flavored shell script. Please ensure your environment is compatible before proceeding!
 
+The `--choose` feature depends upon either the `dmenu` or `rofi` package (Rofi is preferred). You may still use `--load`/`--new` without these dependencies, however. When both `rofi` *and* `dmenu` are installed, `rofi` is prioritized. You may force usage of `dmenu` (or any other dmenu-compatible alternative) via the `--dmenu` flag (e.g. `--dmenu="dmenu"`).
+
+### All platforms
 Clone this repository and add it to your `$PATH`.
 
-The script depends on `dmenu`. Rofi is also supported and automatically used if available. You can also override, e.g. `--dmenu="rofi -dmenu"`.
+NOTE: To update, you will need to run `git pull` from within the repository
+
+### Arch-based Linux
+#### Option A: Install package file
+Download the latest release "pkg.tar.zst" file from [Releases](https://github.com/chaorace/qutebrowser-profile/releases) and install using `pacman -U [PACKAGE FILE]`
+
+NOTE: To update, you will need to download the latest release and install the file again via `pacman -U [PACKAGE FILE]`
+#### Option B: Install via repo
+Edit `/etc/pacman.conf`, add an entry for this package's dedicated Arch repository:
+```
+[qutebrowser-profile-chao]
+SigLevel = Optional TrustAll
+Server = https://chaorace.github.io/qutebrowser-profile/pool
+```
+
+Finally, install via `pacman -S qutebrowser-profile-chao`
+
+NOTE: Installing this way will cause the package to automatically update when running `pacman -Syu`. Please only use this method if you find that to be acceptable!
 
 ## Getting started
 
