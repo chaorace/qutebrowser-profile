@@ -81,6 +81,12 @@ USAGE
  
     The user can choose any existing profile or type the name of a new profile into dmenu to load qutebrowser
     in a new profile. See --only-existing below to restrict this.
+    
+  --allow-no-profile, -np SLOTNAME
+    If specified, a special choice option will be provided that launches qutebrowser without applying any profiles.
+    This is effectively identical to launching qutebrowser directly! No effect with --new option.
+
+    SLOTNAME is an optional parameter that controls the name to be used for this special choice option (default: "default").
  
   --only-existing, -e
     If specified, and --choose is in operation, the user can only choose an existing profile.
