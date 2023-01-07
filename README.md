@@ -8,7 +8,9 @@ I use my system for different projects and purposes, such as *email*, *cloud dev
 
 ## Credit
 This fork is maintained by [Christopher Crockett](https://github.com/chaorace/qutebrowser-profile)
+
 Base package written by [Jonny Tyers](https://github.com/jtyers/qutebrowser-profile)
+
 Original concept by [ayekat](https://github.com/ayekat/dotfiles/blob/master/bin/qutebrowser)
 
 ## Installation
