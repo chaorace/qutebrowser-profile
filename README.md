@@ -75,31 +75,37 @@ USAGE
     Created named profile and launch qutebrowser with it. 
 
   --choose, -c
-    If specified, the user is asked to select a profile via dmenu. If dmenu returns an empty string or non-zero 
-    exit code (eg user pressed escape instead of choosing an option) the operation is aborted and qutebrowser 
-    is not opened.
- 
-    The user can choose any existing profile or type the name of a new profile into dmenu to load qutebrowser
-    in a new profile. See --only-existing below to restrict this.
-    
+    If specified, the user is asked to select a profile via dmenu. Any profile whose name starts with "." is
+    considered to be hidden and will be omitted from the choice list unless the --show-hidden option is used.
+
+    The user may choose among the listed profiles or manually type the desired profile name. If the input matches an
+    existing profile, this will launch it (hidden profiles may be selected this way). If no existing profile is
+    found, a new qutebrowser profile will instead be created and launched. See --only-existing below to restrict this.
+
+    If dmenu returns an empty string or non-zero exit code (e.g.: user pressed escape instead of choosing an option)
+    the operation is aborted and qutebrowser is not opened.
+
   --allow-no-profile, -np SLOTNAME
     If specified, a special choice option will be provided that launches qutebrowser without applying any profiles.
     This is effectively identical to launching qutebrowser directly! No effect with --new option.
 
     SLOTNAME is an optional parameter that controls the name to be used for this special choice option (default: "default").
- 
+
+  --show-hidden, -a
+    If specified, normally hidden profiles (i.e.: has a name starting in ".") will be included in the resulting list/prompt.
+
   --only-existing, -e
     If specified, and --choose is in operation, the user can only choose an existing profile.
  
   --list
-    List all known profiles.
+    Lists non-hidden profiles. See --show-hidden above for lifting this restriction.
   
   --dmenu
     Override location of dmenu. Rofi is autodetected without you needing to set this.
 
   --set OPTION VALUE
-    When used with --new, adds `qutebrowser --set` options in generated `.desktop` file.
-    May be specified multiple times.
+    When used with --new, sets profile-specific config options by passing through
+    the --set flags to qutebrowser. May be specified multiple times.
   
   --qutebrowser
     Override location of qutebrowser to call.
