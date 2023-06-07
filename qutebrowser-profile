@@ -29,48 +29,63 @@ QP_VERSION="1.1.0"
 
 # Wrapper for qutebrowser that allows the user to maintain different profiles for qutebrowser
 #
-usage="$QP_NAME [--list] [--choose [--only-existing] | --load <name> | --new <name>] [qutebrowser args]"
+usage="$QP_NAME [--list | --load <name> | --new <name> | --choose] [additional args] [qutebrowser args]"
 read -r -d '' help <<EOF
   $QP_NAME - use qutebrowser with per-profile cache, session history, etc
 
-USAGE
-  $QP_NAME [--list] [--choose [--only-existing] | --load <name> | --new <name>] [qutebrowser args]
+SYNTAX
+  $usage
+
+MAIN ARGUMENTS
+  --list
+    Prints profiles to output. May be combined with another main argument.
+
+    Only non-hidden profiles will be shown.
+    See --show-hidden for lifting this restriction.
+
+  --load <name>, -l <name>
+    Directly load profile called <name>.
+
+  --new <name>, -n <name>
+    Directly create and load profile called <name>.
 
   --choose, -c
-    If specified, the user is asked to select a profile via dmenu. Any profile whose name starts with "." is
-    considered to be hidden and will be omitted from the choice list unless the --show-hidden option is used.
+    Prompt the user to select a profile via dmenu/Rofi.
+    Arbitrary name inputs are also accepted, which will either create a new
+    profile with the given name or launch a matching hidden profile.
 
-    The user may choose among the listed profiles or manually type the desired profile name. If the input matches an
-    existing profile, this will launch it (hidden profiles may be selected this way). If no existing profile is
-    found, a new qutebrowser profile will instead be created and launched. See --only-existing below to restrict this.
+    Only non-hidden profiles will be shown.
+    See --show-hidden for lifting this restriction.
 
-    If dmenu returns an empty string or non-zero exit code (e.g.: user pressed escape instead of choosing an option)
-    the operation is aborted and qutebrowser is not opened.
+ADDITIONAL ARGUMENTS
+  --allow-no-profile <slotname>, -np <slotname>
+    Applies to: --choose, --load
 
-  --allow-no-profile, -np SLOTNAME
-    If specified, a special choice option will be provided that launches qutebrowser without applying any profiles.
-    This is effectively identical to launching qutebrowser directly! No effect with --new option.
+    If specified, a special choice option called <slotname> will be provided
+    which launches qutebrowser without applying any profiles.
 
-    SLOTNAME is an optional parameter that controls the name to be used for this special choice option (default: "default").
+  --dmenu <path>
+    Override location of dmenu executable.
 
-  --show-hidden, -a
-    If specified, normally hidden profiles (i.e.: has a name starting in ".") will be included in the resulting list/prompt.
+    Rofi is autodetected without needing to set this.
 
   --only-existing, -e
-    If specified, and --choose is in operation, the user can only choose an existing profile.
- 
-  --list
-    Lists non-hidden profiles. See --show-hidden above for lifting this restriction.
-  
-  --dmenu
-    Override location of dmenu. Rofi is autodetected without you needing to set this.
+    Applies to: --choose
+
+    Prevents creating new profiles by manually entering a name into the prompt.
+
+  --qutebrowser <path>
+    Override location of qutebrowser executable.
 
   --set OPTION VALUE
-    When used with --new, sets profile-specific config options by passing through
-    the --set flags to qutebrowser. May be specified multiple times.
-  
-  --qutebrowser
-    Override location of qutebrowser to call.
+    Sets qutebrowser configuration settings for the session.
+    May be specified multiple times.
+
+    No effect if a qutebrowser session is already running for selected profile.
+
+  --show-hidden, -a
+    If specified, normally hidden profiles (i.e.: has a name starting in ".")
+    will be included in the resulting list/prompt.
 
 Version $QP_VERSION
 This fork is maintained by Christopher Crockett (https://github.com/chaorace/qutebrowser-profile)
