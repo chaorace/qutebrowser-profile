@@ -15,7 +15,7 @@ arch=("any")
 makedepends=("git")
 depends=("bash")
 source=("qutebrowser-profile" "qutebrowser-profile.desktop" "LICENSE")
-md5sums=("SKIP" "e5fb0ad1c4094162cd1daeedee34a51f" "c59c79cb36dda6da9a5fd8b20723c1ee")
+md5sums=("SKIP" "582d38d2e2ee4e95f5fc15b01cab3658" "c59c79cb36dda6da9a5fd8b20723c1ee")
 
 pkgver() {
   cd "${srcdir}"
