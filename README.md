@@ -58,60 +58,65 @@ You'll get a rofi/dmenu prompt asking for a profile name. Type one in and hit en
  * Each profile will be treated as a unique app by the window managers because we set a unique WM\_CLASS for X11 and a unique app\_id for Wayland (requires Qutebrowser > 1.14.1).
  * The same Qutebrowser icon is used for the new profiles, but you can reference your own by editing `~/.local/share/applications/qutebrowser-$profile.desktop`.
 
-## Other options
+## Usage
 
-Here's the full options list (also available with `--help`):
-
+### Syntax
 ```
-  qutebrowser-profile - use qutebrowser with per-profile cache, session history, etc
+qutebrowser-profile [Main Argument] [Option Arguments] [qutebrowser Arguments]
+```
+### Main Arguments
+Only one of these may be used. `--choose` is the default.
+* `--list`, `-l`
 
-USAGE
-  qutebrowser-profile [--list] [--choose [--only-existing] | --load <name> | --new <name>] [qutebrowser args]
-  
-  --load <name>
-    Load named profile and run qutebrowser.
+    Prints profiles to output. May be combined with another main argument.
+
+    Only non-hidden profiles will be shown. See `--show-hidden` for lifting this restriction.
+* `--load <name>`, `-p <name>`
+
+    Directly load profile called `<name>`.
+* `--new <name>`, `-n <name>`
+
+    Directly create and load profile called `<name>`.
+* `--choose`, `-c`
+
+    Prompt the user to select a profile via dmenu/Rofi. Arbitrary name inputs are also accepted, which will either create a new profile with the given name or launch a matching hidden profile.
+
+    Only non-hidden profiles will be shown. See `--show-hidden` for lifting this restriction.
+
+    If dmenu/Rofi returns an empty string or non-zero exit code (e.g.: user pressed escape instead of choosing an option), qutebrowser will not be opened.
+
+### Option Arguments
+
+* `--allow-no-profile [<slotname>]`, `-np [<slotname>]`
+
+    Applies to: `--choose`, `--load`
+
+    If specified, a special choice option called `<slotname>` will be provided which launches qutebrowser without applying any profiles.
+
+    `<slotname>` is an optional parameter that controls the name to be used for this special choice option (default: "default").
+* `--dmenu <path>`
+
+    Override location of dmenu executable. Rofi is autodetected without you needing to set this.
+* `--only-existing`, `-e`
+
+    Applies to: `--choose`
+
+    Prevents creating new profiles by manually entering a name into the prompt.
+* `--qutebrowser <path>`
+
+    Override location of qutebrowser executable.
+* `--set OPTION VALUE`
+
+    Sets qutebrowser configuration settings for the session. May be specified multiple times.
     
-  --new <name>
-    Created named profile and launch qutebrowser with it. 
+    No effect if a qutebrowser session is already running for selected profile.
+* `--show-hidden`, `-a`
 
-  --choose, -c
-    If specified, the user is asked to select a profile via dmenu. Any profile whose name starts with "." is
-    considered to be hidden and will be omitted from the choice list unless the --show-hidden option is used.
+    Applies to: `--list`, `--choose`
 
-    The user may choose among the listed profiles or manually type the desired profile name. If the input matches an
-    existing profile, this will launch it (hidden profiles may be selected this way). If no existing profile is
-    found, a new qutebrowser profile will instead be created and launched. See --only-existing below to restrict this.
-
-    If dmenu returns an empty string or non-zero exit code (e.g.: user pressed escape instead of choosing an option)
-    the operation is aborted and qutebrowser is not opened.
-
-  --allow-no-profile, -np SLOTNAME
-    If specified, a special choice option will be provided that launches qutebrowser without applying any profiles.
-    This is effectively identical to launching qutebrowser directly! No effect with --new option.
-
-    SLOTNAME is an optional parameter that controls the name to be used for this special choice option (default: "default").
-
-  --show-hidden, -a
     If specified, normally hidden profiles (i.e.: has a name starting in ".") will be included in the resulting list/prompt.
 
-  --only-existing, -e
-    If specified, and --choose is in operation, the user can only choose an existing profile.
- 
-  --list
-    Lists non-hidden profiles. See --show-hidden above for lifting this restriction.
-  
-  --dmenu
-    Override location of dmenu. Rofi is autodetected without you needing to set this.
-
-  --set OPTION VALUE
-    When used with --new, sets profile-specific config options by passing through
-    the --set flags to qutebrowser. May be specified multiple times.
-  
-  --qutebrowser
-    Override location of qutebrowser to call.
-
-```
-
+    When used with --new, the given configuration will also be embedded into the generated XDG Desktop file.
 ## Licence
 
 See LICENSE file
