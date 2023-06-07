@@ -25,7 +25,7 @@
 #
 
 QP_NAME="qutebrowser-profile"
-QP_VERSION="1.1.0"
+QP_VERSION="1.1.1"
 
 # Wrapper for qutebrowser that allows the user to maintain different profiles for qutebrowser
 #
