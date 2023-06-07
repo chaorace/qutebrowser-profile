@@ -87,6 +87,12 @@ ADDITIONAL ARGUMENTS
     If specified, normally hidden profiles (i.e.: has a name starting in ".")
     will be included in the resulting list/prompt.
 
+  --suppress-info
+    If specified, prevents info messages from printing to output.
+
+    This is useful when using the program a protocol handler if certain
+    applications (e.g.: Slack) treat log output as a launch failure.
+
 Version $QP_VERSION
 This fork is maintained by Christopher Crockett (https://github.com/chaorace/qutebrowser-profile)
 Base package written by Jonny Tyers (https://github.com/jtyers/qutebrowser-profile)
@@ -240,7 +246,7 @@ runQb() {
       || warningMessage $(printf "$errorMsg" $session qtwebengine_dictionaries)
   fi
 
-  echo "using basedir $basedir"
+  infoMessage "using basedir $basedir"
 
   # Launch qutebrowser with a unique app ID for each profile.
   # X11 uses the  --qt-arg name to set WM_CLASS
@@ -254,8 +260,15 @@ runQb() {
 }
 
 runQbNoProfile() {
-  echo "launching without any profile"
+  infoMessage "launching without any profile"
   $qutebrowser $setFlags ${qbArgs[@]} &>/dev/null &
+}
+
+infoMessage() {
+  msg="$@"
+  if [ $echoInfo -eq 1 ]; then
+    echo "$msg"
+  fi
 }
 
 # show a warning message, without exiting
@@ -275,6 +288,7 @@ warningMessage() {
 
 #uid=$(id -u)
 profilesRoot="$XDG_DATA_HOME/qutebrowser" #"/run/user/$uid/qutebrowser"
+echoInfo=1
 choose=0
 allowNoProfile=0
 noProfileName="default"
@@ -301,6 +315,7 @@ else
       --help|-h) echo "$help"; exit 0 ;;
       --qutebrowser) qutebrowser="$2"; shift; shift ;;
       --dmenu) dmenu="$2"; shift; shift ;;
+      --suppress-info) echoInfo=0; shift ;;
       
       --list|-l) list=1; shift ;;
       --choose|-c) choose=1; shift ;;
@@ -414,7 +429,7 @@ elif [ -n "$new" ]; then
   [ -n "$load" ] && die "cannot use --load with --new"
 
   createDesktopFile "$new"
-  echo "qutebrowser profile '$new' created."
+  infoMessage "qutebrowser profile '$new' created."
 
   runQbWithProfile "$new"
 fi
