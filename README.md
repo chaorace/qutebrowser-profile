@@ -117,6 +117,12 @@ Only one of these may be used. `--choose` is the default.
     If specified, normally hidden profiles (i.e.: has a name starting in ".") will be included in the resulting list/prompt.
 
     When used with --new, the given configuration will also be embedded into the generated XDG Desktop file.
+
+* `--suppress-info`
+
+    If specified, prevents info messages from printing to output.
+
+    This is useful when using the program a protocol handler if certain applications (e.g.: Slack) treat log output as a launch failure.
 ## Licence
 
 See LICENSE file
